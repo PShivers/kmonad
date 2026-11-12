@@ -1,5 +1,6 @@
 ;; ==========================================================================
-;; KMonad Configuration for Windows
+;; KMonad Configuration: Colemak-DH with Space-as-Ctrl & Right-Alt Navigation
+;; Converted from AutoHotkey: qwerty2colemakdh_with_spacectrl.ahk
 ;; ==========================================================================
 
 (defcfg
@@ -7,66 +8,62 @@
   input  (low-level-hook)
 
   ;; Output keyboard events back into Windows
-  ;; Optional repeat delay and rate: (output (send-event-sink 250 30))
   output (send-event-sink)
 
-  ;; If true, any key not explicitly defined in defsrc passes through unchanged
+  ;; Unmapped keys pass through unchanged
   fallthrough true
 
-  ;; Disallow execution of arbitrary shell commands from inside kmonad config
+  ;; Disallow execution of arbitrary shell commands
   allow-cmd false
 )
 
 ;; --------------------------------------------------------------------------
-;; Source Layer (defsrc)
-;; The physical keys on your keyboard that KMonad will intercept and remap.
-;; Keys not listed here will fall through (if fallthrough is true).
+;; Physical Input Layout (QWERTY ANSI)
 ;; --------------------------------------------------------------------------
 (defsrc
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  caps a    s    d    f    g    h    j    k    l    scln '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet lalt           spc            ralt rmet cmp  rctl
 )
 
 ;; --------------------------------------------------------------------------
-;; Aliases (defalias)
-;; Define custom key actions, tap-holds, and layer switches here.
+;; Aliases
 ;; --------------------------------------------------------------------------
 (defalias
-  ;; CapsLock: Tap for Escape, Hold for Left Control
-  ec   (tap-next-release esc lctl)
+  ;; Space: Tap for Space, Hold for Left Control (200ms threshold, matching AHK)
+  spc-ctl (tap-hold-next-release 200 spc lctl)
 
-  ;; Space: Tap for Space, Hold to activate Navigation layer
-  spcn (tap-next-release spc (layer-toggle nav))
-
-  ;; Layer toggle for navigation layer directly (alternative)
-  nav  (layer-toggle nav)
+  ;; Right Alt: Hold to activate Navigation layer
+  nav     (layer-toggle nav)
 )
 
 ;; --------------------------------------------------------------------------
-;; Base Layer (deflayer base)
-;; Your primary typing layer.
+;; Base Layer: Colemak-DH ANSI + Space-Ctrl + Caps/Backspace Swap
 ;; --------------------------------------------------------------------------
-(deflayer base
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @ec  a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt          @spcn           ralt rmet cmp  rctl
+(deflayer colemak-dh
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    caps
+  tab  q    w    f    p    b    j    l    u    y    scln [    ]    \
+  bspc a    r    s    t    g    m    n    e    i    o    '    ret
+  lsft x    c    d    v    z    k    h    ,    .    /    rsft
+  lctl lmet lalt          @spc-ctl        @nav rmet cmp  rctl
 )
 
 ;; --------------------------------------------------------------------------
-;; Navigation Layer (deflayer nav)
-;; Activated while holding Space (or your chosen layer key).
-;; Provides vim-style navigation, home/end, and page up/down.
-;; '_' means fall through to the layer below or transparent key.
+;; Navigation Layer: Activated while holding Right Alt
+;;
+;; Physical positions:
+;;   H / J / K / L  ->  Left / Down / Up / Right
+;;   U / I / O / P  ->  Home / PageDown / PageUp / End
+;;   Caps (physical)->  Backspace
+;;   Bspc (physical)->  Delete
+;;   _              ->  Transparent (passes through, allowing Shift/Ctrl combos)
 ;; --------------------------------------------------------------------------
 (deflayer nav
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    home pgdn pgup end  _    _    _    _
-  _    _    _    _    _    _    left down up   rght _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    del
+  _    _    _    _    _    _    _    home pgdn pgup end  _    _    _
+  bspc _    _    _    _    _    left down up   rght _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _              _              _    _    _    _
 )

@@ -1,109 +1,63 @@
-# KMonad Windows Configuration
+# KMonad Windows Configuration (Colemak-DH)
 
 A Git repository for managing and running your [KMonad](https://github.com/kmonad/kmonad) keyboard configuration on Windows.
 
 ---
 
-## Repository Structure
+## Current Configuration Overview
 
-```text
-kmonad/
-├── .gitignore         # Ignores binaries, logs, and temp files
-├── README.md          # Setup and configuration guide
-├── config.kbd         # Main KMonad keyboard configuration (Windows low-level hook)
-├── start-kmonad.bat   # Windows Command Prompt batch launcher
-└── start-kmonad.ps1   # PowerShell launcher (supports -Background flag)
+The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/config.kbd) replicates your AutoHotkey setup (`qwerty2colemakdh_with_spacectrl.ahk`) with the following enhancements:
+
+1. **Colemak-DH ANSI Layout**:
+   * Letters remapped from QWERTY to Colemak-DH.
+2. **Caps Lock & Backspace Swapped**:
+   * Physical `CapsLock` $\rightarrow$ `Backspace`
+   * Physical `Backspace` $\rightarrow$ `CapsLock`
+3. **Space Dual-Role (`@spc-ctl`)**:
+   * **Tap**: `Space`
+   * **Hold (> 200ms)**: `Left Control`
+4. **Right Alt Navigation Layer (`@nav`)**:
+   * Hold **Right Alt** to activate navigation without leaving the home row:
+     * `H / J / K / L` (physical) $\rightarrow$ `Left / Down / Up / Right`
+     * `U / I / O / P` (physical) $\rightarrow$ `Home / PageDown / PageUp / End`
+     * Physical `CapsLock` $\rightarrow$ `Backspace`
+     * Physical `Backspace` $\rightarrow$ `Delete`
+     * All modifier combinations (like `Shift` for selection or `Ctrl` for word jump) pass through transparently.
+
+---
+
+## Running KMonad
+
+### Option A: Direct Command / PowerShell
+```powershell
+.\kmonad.exe .\config.kbd
 ```
+*(Press `Ctrl+C` in the console to stop.)*
 
----
-
-## 1. Prerequisites & Installation
-
-### Option A: Download Pre-built Binary
-1. Go to the [KMonad GitHub Releases](https://github.com/kmonad/kmonad/releases).
-2. Download the latest Windows binary (usually named `kmonad.exe` or `kmonad-*.exe`).
-3. Either:
-   - Place `kmonad.exe` directly in this repository folder (`.gitignore` excludes it from git commits), OR
-   - Move `kmonad.exe` into a folder that is in your system `PATH` (such as `C:\Tools` or `C:\Users\<user>\bin`).
-
----
-
-## 2. Windows Configuration Details
-
-Windows KMonad uses Windows APIs directly without needing Linux-style device nodes:
-
-```lisp
-(defcfg
-  input  (low-level-hook)
-  output (send-event-sink)
-  fallthrough true
-  allow-cmd false
-)
-```
-
-- **`input (low-level-hook)`**: Uses Windows low-level keyboard hooks to capture key events.
-- **`output (send-event-sink)`**: Sends injected virtual keystrokes back to Windows.
-- **`fallthrough true`**: Any keys not defined in `defsrc` or your layers will pass through normally.
-
----
-
-## 3. Included Sample Layout
-
-In `config.kbd`, standard US ANSI 60%/TKL keys are defined with useful everyday enhancements:
-- **Caps Lock Dual-Role (`@ec`)**:
-  - **Tap**: `Escape`
-  - **Hold**: `Left Control`
-- **Space Dual-Role (`@spcn`)**:
-  - **Tap**: `Space`
-  - **Hold**: Activates the **`nav`** layer
-- **Navigation Layer (`nav`)**:
-  - `H / J / K / L` -> Left / Down / Up / Right (Vim arrows)
-  - `U / I / O / P` -> Home / PageDown / PageUp / End
-
-You can customize or add more layers (e.g., NumPad, Symbols, Media controls) in `config.kbd`.
-
----
-
-## 4. Running KMonad
-
-### Interactive Mode (Foreground)
-Using Batch script:
+### Option B: Batch Script (No ExecutionPolicy restrictions)
 ```cmd
-start-kmonad.bat
+.\start-kmonad.bat
 ```
-Using PowerShell:
-```powershell
-.\start-kmonad.ps1
-```
-*(Press `Ctrl+C` in the console window to stop KMonad.)*
 
-### Background Mode (No Console Window)
-Using PowerShell:
+### Option C: Background Mode
 ```powershell
-.\start-kmonad.ps1 -Background
+powershell -ExecutionPolicy Bypass -File .\start-kmonad.ps1 -Background
 ```
-To stop the background process later:
+To stop the background process:
 ```powershell
 Stop-Process -Name kmonad
 ```
 
 ---
 
-## 5. Starting Automatically on Boot (Optional)
+## Starting Automatically on Boot (Task Scheduler)
 
-### Using Windows Startup Folder:
-1. Press `Win + R`, type `shell:startup`, and hit Enter.
-2. Create a shortcut to `start-kmonad.bat` (or use a `.vbs` wrapper / Task Scheduler to run without a pop-up window).
-
-### Using Windows Task Scheduler:
-1. Open **Task Scheduler** (`taskschd.msc`).
-2. Click **Create Task** (not Basic Task).
-3. **General**:
-   - Name: `KMonad`
-   - Select **Run only when user is logged on** (or **Run with highest privileges** if needed).
-4. **Triggers**:
-   - New Trigger: **At log on** of your user.
-5. **Actions**:
-   - Action: **Start a program**
-   - Program/script: `powershell.exe`
-   - Add arguments: `-WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\path\to\kmonad\start-kmonad.ps1" -Background`
+1. Press `Win + R`, type `taskschd.msc`, and press Enter.
+2. Click **Create Task**:
+   * **General**: Name: `KMonad`, select **Run only when user is logged on**.
+   * **Triggers**: Click **New...** $\rightarrow$ Begin the task **At log on**.
+   * **Actions**: Click **New...** $\rightarrow$ Program: `powershell.exe`, Arguments:
+     ```text
+     -WindowStyle Hidden -ExecutionPolicy Bypass -File "c:\Users\pshivers\code-win\kmonad\start-kmonad.ps1" -Background
+     ```
+3. Save the task.
