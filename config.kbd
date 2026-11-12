@@ -1,0 +1,72 @@
+;; ==========================================================================
+;; KMonad Configuration for Windows
+;; ==========================================================================
+
+(defcfg
+  ;; Windows uses low-level keyboard hooks to capture keystrokes
+  input  (low-level-hook)
+
+  ;; Output keyboard events back into Windows
+  ;; Optional repeat delay and rate: (output (send-event-sink 250 30))
+  output (send-event-sink)
+
+  ;; If true, any key not explicitly defined in defsrc passes through unchanged
+  fallthrough true
+
+  ;; Disallow execution of arbitrary shell commands from inside kmonad config
+  allow-cmd false
+)
+
+;; --------------------------------------------------------------------------
+;; Source Layer (defsrc)
+;; The physical keys on your keyboard that KMonad will intercept and remap.
+;; Keys not listed here will fall through (if fallthrough is true).
+;; --------------------------------------------------------------------------
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet cmp  rctl
+)
+
+;; --------------------------------------------------------------------------
+;; Aliases (defalias)
+;; Define custom key actions, tap-holds, and layer switches here.
+;; --------------------------------------------------------------------------
+(defalias
+  ;; CapsLock: Tap for Escape, Hold for Left Control
+  ec   (tap-next-release esc lctl)
+
+  ;; Space: Tap for Space, Hold to activate Navigation layer
+  spcn (tap-next-release spc (layer-toggle nav))
+
+  ;; Layer toggle for navigation layer directly (alternative)
+  nav  (layer-toggle nav)
+)
+
+;; --------------------------------------------------------------------------
+;; Base Layer (deflayer base)
+;; Your primary typing layer.
+;; --------------------------------------------------------------------------
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @ec  a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt          @spcn           ralt rmet cmp  rctl
+)
+
+;; --------------------------------------------------------------------------
+;; Navigation Layer (deflayer nav)
+;; Activated while holding Space (or your chosen layer key).
+;; Provides vim-style navigation, home/end, and page up/down.
+;; '_' means fall through to the layer below or transparent key.
+;; --------------------------------------------------------------------------
+(deflayer nav
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    home pgdn pgup end  _    _    _    _
+  _    _    _    _    _    _    left down up   rght _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              _              _    _    _    _
+)

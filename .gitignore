@@ -1,0 +1,16 @@
+# Binaries and executables
+*.exe
+*.dll
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# OS specific files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor / IDE settings
+.vscode/
+.idea/
