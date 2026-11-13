@@ -3,7 +3,10 @@
 ;; - CapsLock and Backspace swapped
 ;; - Space-as-Ctrl (tap: space, hold: control)
 ;; - Right Alt -> Control
-;; - Left Alt  -> Nav Layer Toggle (IJKL arrows, word skip on m/h and o/;)
+;; - Left Alt  -> Nav Layer Toggle:
+;;     Row 2 (l / u / y): PageUp / Up / PageDown
+;;     Row 3 (m / n / e / i / o): WordLeft / Left / Down / Right / WordRight
+;;     Row 4 (h / , / .): Home / Insert / End
 ;; ==========================================================================
 
 (defcfg
@@ -59,26 +62,34 @@
 ;; --------------------------------------------------------------------------
 ;; Navigation Layer: Activated while holding Left Alt
 ;;
-;; Home Row:
-;;   H (m/h key)    ->  Control + Left (Word Left)
-;;   J              ->  Left Arrow
-;;   K              ->  Down Arrow
-;;   L              ->  Right Arrow
-;;   Scln (o/; key) ->  Control + Right (Word Right)
+;; Physical positions & Colemak-DH labels:
 ;;
-;; Upper Row:
-;;   I              ->  Up Arrow
-;;   U / O          ->  Home / End
-;;   Y / P          ->  PageUp / PageDown
+;; Upper Row (physical u / i / o  -> Colemak l / u / y):
+;;   U (Colemak l)  ->  PageUp
+;;   I (Colemak u)  ->  Up Arrow
+;;   O (Colemak y)  ->  PageDown
 ;;
+;; Home Row (physical h / j / k / l / scln -> Colemak m / n / e / i / o):
+;;   H (Colemak m)  ->  Control + Left (Word Left)
+;;   J (Colemak n)  ->  Left Arrow
+;;   K (Colemak e)  ->  Down Arrow
+;;   L (Colemak i)  ->  Right Arrow
+;;   ; (Colemak o)  ->  Control + Right (Word Right)
+;;
+;; Bottom Row (physical m / , / . -> Colemak h / , / .):
+;;   M (Colemak h)  ->  Home
+;;   , (comma)      ->  Insert
+;;   . (period)     ->  End
+;;
+;; Extras:
 ;;   Caps (physical)->  Backspace
 ;;   Bspc (physical)->  Delete
-;;   _              ->  Transparent
+;;   _              ->  Transparent (passes through)
 ;; --------------------------------------------------------------------------
 (deflayer nav
   _    _    _    _    _    _    _      _    _    _    _       _    _    del
-  _    _    _    _    _    _    pgup   home up   end  pgdn    _    _    _
+  _    _    _    _    _    _    _      pgup up   pgdn _       _    _    _
   bspc _    _    _    _    _    C-left left down rght C-rght  _    ret
-  _    _    _    _    _    _    _      _    _    _    _       _
+  _    _    _    _    _    _    _      home ins  end  _       _
   _    _    _              _                _    _    _       _
 )
