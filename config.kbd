@@ -1,13 +1,21 @@
 ;; ==========================================================================
 ;; KMonad Configuration: Colemak-DH
+;;
+;; Key Remappings:
 ;; - CapsLock and Backspace swapped
-;; - Space-as-Ctrl (tap: space, hold: control)
-;; - Right Alt -> Control
-;; - Left Alt  -> Nav Layer Toggle:
+;; - Space: Tap for Space, Hold for Control
+;; - Bottom Row (Left to Right):
+;;     Physical Left Ctrl -> Windows (lmet)
+;;     Physical Left Win  -> Alt (lalt)
+;;     Physical Left Alt  -> Control (lctl)
+;;     Physical Space     -> Space / Control tap-hold
+;;     Physical Right Alt -> Navigation Layer Toggle (@nav)
+;;
+;; Navigation Layer (Right Alt held):
 ;;     Row 2 (l / u / y): PageUp / Up / PageDown
 ;;     Row 3 (m / n / e / i / o): WordLeft / Left / Down / Right / WordRight
 ;;     Row 4 (h / , / .): Home / Insert / End
-;;     Space (in Nav): Alt + Space (triggers AHK toggle)
+;;     Space: Alt + Space (triggers AHK toggle)
 ;; ==========================================================================
 
 (defcfg
@@ -42,26 +50,29 @@
   ;; Space: Tap for Space, Hold for Left Control (200ms threshold)
   spc-ctl (tap-hold-next-release 200 spc lctl)
 
-  ;; Left Alt: Hold to activate Navigation layer
+  ;; Right Alt: Hold to activate Navigation layer
   nav     (layer-toggle nav)
 )
 
 ;; --------------------------------------------------------------------------
 ;; Base Layer: Colemak-DH ANSI
-;; - Row 1: bspc physical -> caps
-;; - Row 3: caps physical -> bspc
-;; - Bottom: Left Alt -> @nav, Space -> @spc-ctl, Right Alt -> rctl
+;;
+;; Bottom row modifier remapping:
+;;   lctl (physical) -> lmet  (Windows)
+;;   lmet (physical) -> lalt  (Alt)
+;;   lalt (physical) -> lctl  (Control)
+;;   ralt (physical) -> @nav  (Navigation Layer Toggle)
 ;; --------------------------------------------------------------------------
 (deflayer colemak-dh
   grv  1    2    3    4    5    6    7    8    9    0    -    =    caps
   tab  q    w    f    p    b    j    l    u    y    scln [    ]    \
   bspc a    r    s    t    g    m    n    e    i    o    '    ret
   lsft x    c    d    v    z    k    h    ,    .    /    rsft
-  lctl lmet @nav          @spc-ctl        rctl rmet cmp  rctl
+  lmet lalt lctl          @spc-ctl        @nav rmet cmp  rctl
 )
 
 ;; --------------------------------------------------------------------------
-;; Navigation Layer: Activated while holding Left Alt
+;; Navigation Layer: Activated while holding Right Alt
 ;;
 ;; Physical positions & Colemak-DH labels:
 ;;
@@ -83,7 +94,7 @@
 ;;   . (period)     ->  End
 ;;
 ;; Bottom Modifier Row:
-;;   Space          ->  Alt + Space (triggers AHK !Space toggle)
+;;   Space          ->  Alt + Space (triggers AHK toggle)
 ;;
 ;; Extras:
 ;;   Caps (physical)->  Backspace

@@ -16,10 +16,14 @@ The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/conf
 3. **Space Dual-Role (`@spc-ctl`)**:
    * **Tap**: `Space`
    * **Hold (> 200ms)**: `Left Control`
-4. **Right Alt $\rightarrow$ Control**:
-   * Physical `Right Alt` acts as `Right Control`.
-5. **Left Alt $\rightarrow$ Ergonomic Right-Hand Navigation Layer**:
-   * Hold **Left Alt** with your left thumb to unlock navigation:
+4. **Bottom Row Modifiers (Left to Right)**:
+   * Physical **Left Ctrl** $\rightarrow$ **Windows (`lmet`)**
+   * Physical **Left Win** $\rightarrow$ **Alt (`lalt`)**
+   * Physical **Left Alt** $\rightarrow$ **Control (`lctl`)**
+   * Physical **Space** $\rightarrow$ Space / Control tap-hold
+   * Physical **Right Alt** $\rightarrow$ **Navigation Layer Toggle (`@nav`)**
+5. **Right Alt $\rightarrow$ Ergonomic Right-Hand Navigation Layer**:
+   * Hold **Right Alt** to unlock navigation:
      * **Upper Row (Colemak `l / u / y`)**:
        * `l` (physical `u`) $\rightarrow$ **PageUp**
        * `u` (physical `i`) $\rightarrow$ **Up Arrow**
@@ -41,18 +45,14 @@ The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/conf
 
 Run [toggle-kmonad.ahk](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.ahk) in the background (or drop a shortcut into `shell:startup`).
 
-### 1. Visual Taskbar Badge
-The script shows an always-visible badge in your Windows system tray (taskbar notification area):
+### Visual Taskbar Badge
+The script shows an always-visible badge in your Windows system tray:
 * **`[DH]` (Vibrant Blue badge)**: Colemak-DH layout is active.
 * **`[QW]` (Subtle Charcoal badge)**: Normal QWERTY layout is active.
-* **Hovering**: Tooltip shows current layout (`Colemak-DH Active` vs `QWERTY Active`).
-* **Right-click**: Context menu to toggle layout, edit `config.kbd`, or exit.
 
-*(Tip: In Windows 11, drag the badge from the `^` overflow menu onto your main taskbar row so it is always visible right next to your clock).*
-
-### 2. Single Hotkey: `Alt + Space`
+### Single Hotkey: `Alt + Space`
 * **To Turn Colemak ON**: Press **`Alt + Space`**.
-* **To Turn Colemak OFF**: Press **`Alt + Space`**.
+* **To Turn Colemak OFF**: Press **`Alt + Space`** (or hold **`Right Alt`** and tap **`Space`**).
 
 ---
 
