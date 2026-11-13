@@ -3,7 +3,7 @@
 ;; - CapsLock and Backspace swapped
 ;; - Space-as-Ctrl (tap: space, hold: control)
 ;; - Right Alt -> Control
-;; - Left Alt  -> Nav Layer Toggle (IJKL arrow keys)
+;; - Left Alt  -> Nav Layer Toggle (IJKL arrows, word skip on m/h and o/;)
 ;; ==========================================================================
 
 (defcfg
@@ -59,21 +59,26 @@
 ;; --------------------------------------------------------------------------
 ;; Navigation Layer: Activated while holding Left Alt
 ;;
-;; Physical IJKL Arrow Cluster:
-;;   I              ->  Up
-;;   J              ->  Left
-;;   K              ->  Down
-;;   L              ->  Right
+;; Home Row:
+;;   H (m/h key)    ->  Control + Left (Word Left)
+;;   J              ->  Left Arrow
+;;   K              ->  Down Arrow
+;;   L              ->  Right Arrow
+;;   Scln (o/; key) ->  Control + Right (Word Right)
+;;
+;; Upper Row:
+;;   I              ->  Up Arrow
 ;;   U / O          ->  Home / End
 ;;   Y / P          ->  PageUp / PageDown
+;;
 ;;   Caps (physical)->  Backspace
 ;;   Bspc (physical)->  Delete
-;;   _              ->  Transparent (passes through, allowing Shift/Ctrl combos)
+;;   _              ->  Transparent
 ;; --------------------------------------------------------------------------
 (deflayer nav
-  _    _    _    _    _    _    _    _    _    _    _    _    _    del
-  _    _    _    _    _    _    pgup home up   end  pgdn _    _    _
-  bspc _    _    _    _    _    _    left down rght _    _    ret
-  _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _              _              _    _    _    _
+  _    _    _    _    _    _    _      _    _    _    _       _    _    del
+  _    _    _    _    _    _    pgup   home up   end  pgdn    _    _    _
+  bspc _    _    _    _    _    C-left left down rght C-rght  _    ret
+  _    _    _    _    _    _    _      _    _    _    _       _
+  _    _    _              _                _    _    _       _
 )

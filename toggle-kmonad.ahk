@@ -3,16 +3,30 @@
 
 ; ==========================================================================
 ; KMonad Hotkey Toggle
-; Press Ctrl + Alt + K to start or stop KMonad.
-; You can change the hotkey below (e.g., F12, ^!k, ^+k, ScrollLock, etc.)
+;
+; NOTE: When KMonad is active, Left Alt is your Nav layer toggle and
+; Right Alt is Control, so Windows cannot receive an "Alt" keypress!
+; Therefore, we use F12 (or Ctrl+Shift+K) which works regardless of KMonad state.
 ; ==========================================================================
 
-^!k::
+; Press F12 to toggle KMonad on/off
+F12::
+{
+    ToggleKmonad()
+}
+
+; You can also use Ctrl + Shift + K (does not require Alt):
+^+k::
+{
+    ToggleKmonad()
+}
+
+ToggleKmonad()
 {
     if ProcessExist("kmonad.exe")
     {
         ProcessClose("kmonad.exe")
-        TrayTip "KMonad", "KMonad Stopped (Default layout)", "Iconi 1"
+        TrayTip "KMonad", "KMonad Stopped (Default keyboard active)", "Iconi 1"
     }
     else
     {
@@ -20,4 +34,3 @@
         TrayTip "KMonad", "KMonad Started (Colemak-DH active)", "Iconi 1"
     }
 }
-
