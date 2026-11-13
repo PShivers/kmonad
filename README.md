@@ -6,58 +6,51 @@ A Git repository for managing and running your [KMonad](https://github.com/kmona
 
 ## Current Configuration Overview
 
-The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/config.kbd) replicates your AutoHotkey setup (`qwerty2colemakdh_with_spacectrl.ahk`) with the following enhancements:
+The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/config.kbd) provides:
 
 1. **Colemak-DH ANSI Layout**:
-   * Letters remapped from QWERTY to Colemak-DH.
+   * Alpha keys remapped to Colemak-DH (`q w f p b j l u y ;` and `a r s t g m n e i o` and `x c d v z k h`).
 2. **Caps Lock & Backspace Swapped**:
    * Physical `CapsLock` $\rightarrow$ `Backspace`
    * Physical `Backspace` $\rightarrow$ `CapsLock`
 3. **Space Dual-Role (`@spc-ctl`)**:
    * **Tap**: `Space`
    * **Hold (> 200ms)**: `Left Control`
-4. **Right Alt Navigation Layer (`@nav`)**:
-   * Hold **Right Alt** to activate navigation without leaving the home row:
-     * `H / J / K / L` (physical) $\rightarrow$ `Left / Down / Up / Right`
-     * `U / I / O / P` (physical) $\rightarrow$ `Home / PageDown / PageUp / End`
+4. **Right Alt $\rightarrow$ Control**:
+   * Physical `Right Alt` acts as `Right Control`.
+5. **Left Alt $\rightarrow$ Navigation Layer (`IJKL` Arrow Cluster)**:
+   * Hold **Left Alt** with your left thumb to navigate with your right hand:
+     * `I` $\rightarrow$ `Up`
+     * `J` $\rightarrow$ `Left`
+     * `K` $\rightarrow$ `Down`
+     * `L` $\rightarrow$ `Right`
+     * `U / O` $\rightarrow$ `Home / End`
+     * `Y / P` $\rightarrow$ `PageUp / PageDown`
      * Physical `CapsLock` $\rightarrow$ `Backspace`
      * Physical `Backspace` $\rightarrow$ `Delete`
-     * All modifier combinations (like `Shift` for selection or `Ctrl` for word jump) pass through transparently.
+     * All modifier combinations (e.g., `Shift` for selecting text) pass through transparently.
 
 ---
 
-## Running KMonad
+## Toggle On/Off on Keypress
 
-### Option A: Direct Command / PowerShell
+### Option A: Windows Shortcut (No Extra Tools)
+1. Right-click [toggle-kmonad.bat](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.bat) $\rightarrow$ **Show more options** $\rightarrow$ **Send to** $\rightarrow$ **Desktop (create shortcut)**.
+2. Right-click the desktop shortcut $\rightarrow$ **Properties**:
+   * Set **Shortcut key** (e.g. `Ctrl + Alt + K`).
+   * Set **Run** to **Minimized** (prevents a window pop-up).
+3. Pressing this hotkey now **toggles KMonad ON and OFF**.
+
+### Option B: AutoHotkey v2 Script
+Run [toggle-kmonad.ahk](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.ahk):
+* Press **`Ctrl + Alt + K`** to toggle KMonad on/off with tray notifications.
+* Place a shortcut in `shell:startup` to keep the hotkey active across reboots.
+
+---
+
+## Manual Execution / Testing
+
 ```powershell
 .\kmonad.exe .\config.kbd
 ```
-*(Press `Ctrl+C` in the console to stop.)*
-
-### Option B: Batch Script (No ExecutionPolicy restrictions)
-```cmd
-.\start-kmonad.bat
-```
-
-### Option C: Background Mode
-```powershell
-powershell -ExecutionPolicy Bypass -File .\start-kmonad.ps1 -Background
-```
-To stop the background process:
-```powershell
-Stop-Process -Name kmonad
-```
-
----
-
-## Starting Automatically on Boot (Task Scheduler)
-
-1. Press `Win + R`, type `taskschd.msc`, and press Enter.
-2. Click **Create Task**:
-   * **General**: Name: `KMonad`, select **Run only when user is logged on**.
-   * **Triggers**: Click **New...** $\rightarrow$ Begin the task **At log on**.
-   * **Actions**: Click **New...** $\rightarrow$ Program: `powershell.exe`, Arguments:
-     ```text
-     -WindowStyle Hidden -ExecutionPolicy Bypass -File "c:\Users\pshivers\code-win\kmonad\start-kmonad.ps1" -Background
-     ```
-3. Save the task.
+*(Press `Ctrl+C` in that console to stop.)*
