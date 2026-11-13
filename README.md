@@ -34,19 +34,25 @@ The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/conf
        * `h` (physical `m`) $\rightarrow$ **Home**
        * `,` (comma) $\rightarrow$ **Insert**
        * `.` (period) $\rightarrow$ **End**
-     * **Toggle Trigger**:
-       * **Left Alt + Space** $\rightarrow$ Emits **`F22`** to cleanly turn KMonad off!
 
 ---
 
-## Unified Toggle Shortcut: Left Alt + Space
+## Visual Layout Indicator & Toggle: `Alt + Space`
 
-Using [toggle-kmonad.ahk](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.ahk):
+Run [toggle-kmonad.ahk](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.ahk) in the background (or drop a shortcut into `shell:startup`).
 
-* **To turn KMonad ON**: Press **`Left Alt + Space`**.
-* **To turn KMonad OFF**: Press **`Left Alt + Space`** (KMonad sends `F22`, which AHK intercepts to shut down KMonad).
+### 1. Visual Taskbar Badge
+The script shows an always-visible badge in your Windows system tray (taskbar notification area):
+* **`[DH]` (Vibrant Blue badge)**: Colemak-DH layout is active.
+* **`[QW]` (Subtle Charcoal badge)**: Normal QWERTY layout is active.
+* **Hovering**: Tooltip shows current layout (`Colemak-DH Active` vs `QWERTY Active`).
+* **Right-click**: Context menu to toggle layout, edit `config.kbd`, or exit.
 
-*(Backups: `F12` or `Ctrl + Shift + K` also toggle).*
+*(Tip: In Windows 11, drag the badge from the `^` overflow menu onto your main taskbar row so it is always visible right next to your clock).*
+
+### 2. Single Hotkey: `Alt + Space`
+* **To Turn Colemak ON**: Press **`Alt + Space`**.
+* **To Turn Colemak OFF**: Press **`Alt + Space`**.
 
 ---
 

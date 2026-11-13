@@ -7,7 +7,7 @@
 ;;     Row 2 (l / u / y): PageUp / Up / PageDown
 ;;     Row 3 (m / n / e / i / o): WordLeft / Left / Down / Right / WordRight
 ;;     Row 4 (h / , / .): Home / Insert / End
-;;     Space (in Nav): F22 (toggles KMonad off)
+;;     Space (in Nav): Alt + Space (triggers AHK toggle)
 ;; ==========================================================================
 
 (defcfg
@@ -83,7 +83,7 @@
 ;;   . (period)     ->  End
 ;;
 ;; Bottom Modifier Row:
-;;   Space          ->  F22 (KMonad toggle trigger)
+;;   Space          ->  Alt + Space (triggers AHK !Space toggle)
 ;;
 ;; Extras:
 ;;   Caps (physical)->  Backspace
@@ -95,5 +95,5 @@
   _    _    _    _    _    _    _      pgup up   pgdn _       _    _    _
   bspc _    _    _    _    _    C-left left down rght C-rght  _    ret
   _    _    _    _    _    _    _      home ins  end  _       _
-  _    _    _              f22               _    _    _       _
+  _    _    _              A-spc             _    _    _       _
 )
