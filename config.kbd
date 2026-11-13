@@ -7,6 +7,7 @@
 ;;     Row 2 (l / u / y): PageUp / Up / PageDown
 ;;     Row 3 (m / n / e / i / o): WordLeft / Left / Down / Right / WordRight
 ;;     Row 4 (h / , / .): Home / Insert / End
+;;     Space (in Nav): F22 (toggles KMonad off)
 ;; ==========================================================================
 
 (defcfg
@@ -81,6 +82,9 @@
 ;;   , (comma)      ->  Insert
 ;;   . (period)     ->  End
 ;;
+;; Bottom Modifier Row:
+;;   Space          ->  F22 (KMonad toggle trigger)
+;;
 ;; Extras:
 ;;   Caps (physical)->  Backspace
 ;;   Bspc (physical)->  Delete
@@ -91,5 +95,5 @@
   _    _    _    _    _    _    _      pgup up   pgdn _       _    _    _
   bspc _    _    _    _    _    C-left left down rght C-rght  _    ret
   _    _    _    _    _    _    _      home ins  end  _       _
-  _    _    _              _                _    _    _       _
+  _    _    _              f22               _    _    _       _
 )

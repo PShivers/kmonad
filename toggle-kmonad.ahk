@@ -4,26 +4,25 @@
 ; ==========================================================================
 ; KMonad Hotkey Toggle
 ;
-; Triggers supported:
-;   1. Copilot Key (hardware sends Left Windows + Left Shift + F23)
-;   2. F12 Key
-;   3. Ctrl + Shift + K
+; Unified shortcut: Left Alt + Space (or F22)
+; - When KMonad is OFF: Press Left Alt + Space to start KMonad.
+; - When KMonad is ON:  Hold Left Alt + press Space (sends F22) to stop KMonad.
 ; ==========================================================================
 
-; Physical Copilot Key
-*#+F23::
-*<#<+F23::
+; Intercept F22 (sent by KMonad when Left Alt + Space is pressed)
+F22::
 {
     ToggleKmonad()
 }
 
-; Quick single-key fallback
+; Intercept Left Alt + Space when KMonad is not running
+<!Space::
+{
+    ToggleKmonad()
+}
+
+; Fallback shortcuts
 F12::
-{
-    ToggleKmonad()
-}
-
-; Shortcut fallback
 ^+k::
 {
     ToggleKmonad()

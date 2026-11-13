@@ -19,7 +19,7 @@ The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/conf
 4. **Right Alt $\rightarrow$ Control**:
    * Physical `Right Alt` acts as `Right Control`.
 5. **Left Alt $\rightarrow$ Ergonomic Right-Hand Navigation Layer**:
-   * Hold **Left Alt** with your left thumb to unlock navigation across three rows of your right hand:
+   * Hold **Left Alt** with your left thumb to unlock navigation:
      * **Upper Row (Colemak `l / u / y`)**:
        * `l` (physical `u`) $\rightarrow$ **PageUp**
        * `u` (physical `i`) $\rightarrow$ **Up Arrow**
@@ -34,25 +34,19 @@ The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/conf
        * `h` (physical `m`) $\rightarrow$ **Home**
        * `,` (comma) $\rightarrow$ **Insert**
        * `.` (period) $\rightarrow$ **End**
-     * **Extras**:
-       * Physical `CapsLock` $\rightarrow$ Backspace
-       * Physical `Backspace` $\rightarrow$ Delete
+     * **Toggle Trigger**:
+       * **Left Alt + Space** $\rightarrow$ Emits **`F22`** to cleanly turn KMonad off!
 
 ---
 
-## Toggle On/Off on Keypress
+## Unified Toggle Shortcut: Left Alt + Space
 
-### Option A: Windows Shortcut (No Extra Tools)
-1. Right-click [toggle-kmonad.bat](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.bat) $\rightarrow$ **Show more options** $\rightarrow$ **Send to** $\rightarrow$ **Desktop (create shortcut)**.
-2. Right-click the desktop shortcut $\rightarrow$ **Properties**:
-   * Set **Shortcut key** to a combination **not using Alt** (e.g. `Ctrl + Shift + K`), because Left Alt is your Nav toggle and Right Alt is Control!
-   * Set **Run** to **Minimized**.
-3. Pressing this hotkey now **toggles KMonad ON and OFF**.
+Using [toggle-kmonad.ahk](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.ahk):
 
-### Option B: AutoHotkey v2 Script
-Run [toggle-kmonad.ahk](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.ahk):
-* Press **`F12`** (or `Ctrl + Shift + K`) to toggle KMonad on/off with tray notifications.
-* Place a shortcut in `shell:startup` to keep the hotkey active across reboots.
+* **To turn KMonad ON**: Press **`Left Alt + Space`**.
+* **To turn KMonad OFF**: Press **`Left Alt + Space`** (KMonad sends `F22`, which AHK intercepts to shut down KMonad).
+
+*(Backups: `F12` or `Ctrl + Shift + K` also toggle).*
 
 ---
 
