@@ -4,18 +4,26 @@
 ; ==========================================================================
 ; KMonad Hotkey Toggle
 ;
-; NOTE: When KMonad is active, Left Alt is your Nav layer toggle and
-; Right Alt is Control, so Windows cannot receive an "Alt" keypress!
-; Therefore, we use F12 (or Ctrl+Shift+K) which works regardless of KMonad state.
+; Triggers supported:
+;   1. Copilot Key (hardware sends Left Windows + Left Shift + F23)
+;   2. F12 Key
+;   3. Ctrl + Shift + K
 ; ==========================================================================
 
-; Press F12 to toggle KMonad on/off
+; Physical Copilot Key
+*#+F23::
+*<#<+F23::
+{
+    ToggleKmonad()
+}
+
+; Quick single-key fallback
 F12::
 {
     ToggleKmonad()
 }
 
-; You can also use Ctrl + Shift + K (does not require Alt):
+; Shortcut fallback
 ^+k::
 {
     ToggleKmonad()
