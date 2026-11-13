@@ -20,3 +20,4 @@
         TrayTip "KMonad", "KMonad Started (Colemak-DH active)", "Iconi 1"
     }
 }
+

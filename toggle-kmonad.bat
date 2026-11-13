@@ -25,3 +25,4 @@ if %errorlevel% equ 0 (
 :: Start KMonad in background
 start "" /B "%KMONAD_BIN%" "%~dp0config.kbd"
 echo [KMonad] Started. Colemak-DH active.
+
