@@ -6,10 +6,11 @@
 ;
 ; Hotkey: Alt + Space
 ;
-; Visual Indicator:
-;   Shows a badge in your taskbar system tray:
-;   - [DH] (Blue badge)  when Colemak-DH is active
-;   - [QW] (Gray badge)  when default QWERTY is active
+; Copilot Key Bridge:
+;   When KMonad remaps Left Win to Alt, the Copilot key's hardware signal
+;   (Win + Shift + F23) arrives as Alt + Shift + F23 (!+F23).
+;   This script catches it and emits the native Windows shortcut (Win + C)
+;   so your Command Palette opens reliably.
 ; ==========================================================================
 
 IconColemak := A_ScriptDir . "\icons\colemak.ico"
@@ -29,11 +30,21 @@ UpdateVisualState()
 SetTimer(UpdateVisualState, 1000)
 
 ; --------------------------------------------------------------------------
-; Single Unified Hotkey: Alt + Space
+; Single Unified Hotkey: Alt + Space (Toggle KMonad)
 ; --------------------------------------------------------------------------
 !Space::
 {
     ToggleKmonad()
+}
+
+; --------------------------------------------------------------------------
+; Copilot Key -> Command Palette (Win + C)
+; Catches the Copilot key both when KMonad is ON (!+F23) and OFF (*#+F23)
+; --------------------------------------------------------------------------
+!+F23::
+*#+F23::
+{
+    SendInput "{LAlt up}{LShift up}#c"
 }
 
 ToggleKmonad()

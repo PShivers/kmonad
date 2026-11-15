@@ -1,21 +1,21 @@
 ;; ==========================================================================
 ;; KMonad Configuration: Colemak-DH
 ;;
-;; Key Remappings:
+;; Layout Summary:
 ;; - CapsLock and Backspace swapped
-;; - Space: Tap for Space, Hold for Control
+;; - Space is standard Space (no tap-hold)
 ;; - Bottom Row (Left to Right):
 ;;     Physical Left Ctrl -> Windows (lmet)
 ;;     Physical Left Win  -> Alt (lalt)
 ;;     Physical Left Alt  -> Control (lctl)
-;;     Physical Space     -> Space / Control tap-hold
+;;     Physical Space     -> Space (spc)
 ;;     Physical Right Alt -> Navigation Layer Toggle (@nav)
 ;;
 ;; Navigation Layer (Right Alt held):
 ;;     Row 2 (l / u / y): PageUp / Up / PageDown
 ;;     Row 3 (m / n / e / i / o): WordLeft / Left / Down / Right / WordRight
 ;;     Row 4 (h / , / .): Home / Insert / End
-;;     Space: Alt + Space (triggers AHK toggle)
+;;     Space: Alt + Space (toggle KMonad off)
 ;; ==========================================================================
 
 (defcfg
@@ -47,28 +47,26 @@
 ;; Aliases
 ;; --------------------------------------------------------------------------
 (defalias
-  ;; Space: Tap for Space, Hold for Left Control (200ms threshold)
-  spc-ctl (tap-hold-next-release 200 spc lctl)
-
   ;; Right Alt: Hold to activate Navigation layer
-  nav     (layer-toggle nav)
+  nav (layer-toggle nav)
 )
 
 ;; --------------------------------------------------------------------------
 ;; Base Layer: Colemak-DH ANSI
 ;;
-;; Bottom row modifier remapping:
+;; Bottom row:
 ;;   lctl (physical) -> lmet  (Windows)
 ;;   lmet (physical) -> lalt  (Alt)
 ;;   lalt (physical) -> lctl  (Control)
-;;   ralt (physical) -> @nav  (Navigation Layer Toggle)
+;;   spc  (physical) -> spc   (Pure Space)
+;;   ralt (physical) -> @nav  (Navigation Layer)
 ;; --------------------------------------------------------------------------
 (deflayer colemak-dh
   grv  1    2    3    4    5    6    7    8    9    0    -    =    caps
   tab  q    w    f    p    b    j    l    u    y    scln [    ]    \
   bspc a    r    s    t    g    m    n    e    i    o    '    ret
   lsft x    c    d    v    z    k    h    ,    .    /    rsft
-  lmet lalt lctl          @spc-ctl        @nav rmet cmp  rctl
+  lmet lalt lctl           spc            @nav rmet cmp  rctl
 )
 
 ;; --------------------------------------------------------------------------
