@@ -13,14 +13,13 @@ The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/conf
 2. **Caps Lock & Backspace Swapped**:
    * Physical `CapsLock` $\rightarrow$ `Backspace`
    * Physical `Backspace` $\rightarrow$ `CapsLock`
-3. **Space Dual-Role (`@spc-ctl`)**:
-   * **Tap**: `Space`
-   * **Hold (> 200ms)**: `Left Control`
+3. **Space**:
+   * Pure, normal **Space** (no tap-hold behavior).
 4. **Bottom Row Modifiers (Left to Right)**:
    * Physical **Left Ctrl** $\rightarrow$ **Windows (`lmet`)**
    * Physical **Left Win** $\rightarrow$ **Alt (`lalt`)**
    * Physical **Left Alt** $\rightarrow$ **Control (`lctl`)**
-   * Physical **Space** $\rightarrow$ Space / Control tap-hold
+   * Physical **Space** $\rightarrow$ **Space (`spc`)**
    * Physical **Right Alt** $\rightarrow$ **Navigation Layer Toggle (`@nav`)**
 5. **Right Alt $\rightarrow$ Ergonomic Right-Hand Navigation Layer**:
    * Hold **Right Alt** to unlock navigation:
@@ -45,14 +44,18 @@ The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/conf
 
 Run [toggle-kmonad.ahk](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.ahk) in the background (or drop a shortcut into `shell:startup`).
 
-### Visual Taskbar Badge
+### 1. Visual Taskbar Badge
 The script shows an always-visible badge in your Windows system tray:
 * **`[DH]` (Vibrant Blue badge)**: Colemak-DH layout is active.
 * **`[QW]` (Subtle Charcoal badge)**: Normal QWERTY layout is active.
 
-### Single Hotkey: `Alt + Space`
+### 2. Single Hotkey: `Alt + Space`
 * **To Turn Colemak ON**: Press **`Alt + Space`**.
 * **To Turn Colemak OFF**: Press **`Alt + Space`** (or hold **`Right Alt`** and tap **`Space`**).
+
+### 3. Copilot Key $\rightarrow$ Command Palette Bridge
+* Because KMonad remaps Left Win $\rightarrow$ Alt, the Copilot key hardware event (`Win + Shift + F23`) is translated into `Alt + Shift + F23`.
+* `toggle-kmonad.ahk` catches this event and immediately triggers the native Windows Command Palette shortcut (`Win + C`), so your Copilot key works seamlessly at all times!
 
 ---
 
