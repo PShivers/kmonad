@@ -13,15 +13,13 @@ The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/conf
 2. **Caps Lock & Backspace Swapped**:
    * Physical `CapsLock` $\rightarrow$ `Backspace`
    * Physical `Backspace` $\rightarrow$ `CapsLock`
-3. **Space**:
-   * Pure, normal **Space** (no tap-hold behavior).
-4. **Bottom Row Modifiers (Left to Right)**:
+3. **Bottom Row Modifiers (Left to Right)**:
    * Physical **Left Ctrl** $\rightarrow$ **Windows (`lmet`)**
    * Physical **Left Win** $\rightarrow$ **Alt (`lalt`)**
    * Physical **Left Alt** $\rightarrow$ **Control (`lctl`)**
    * Physical **Space** $\rightarrow$ **Space (`spc`)**
    * Physical **Right Alt** $\rightarrow$ **Navigation Layer Toggle (`@nav`)**
-5. **Right Alt $\rightarrow$ Ergonomic Right-Hand Navigation Layer**:
+4. **Right Alt $\rightarrow$ Ergonomic Right-Hand Navigation Layer**:
    * Hold **Right Alt** to unlock navigation:
      * **Upper Row (Colemak `l / u / y`)**:
        * `l` (physical `u`) $\rightarrow$ **PageUp**
@@ -42,11 +40,17 @@ The configuration in [config.kbd](file:///c:/Users/pshivers/code-win/kmonad/conf
 
 ## Visual Layout Indicator & Toggle: `Alt + Space`
 
-Run [toggle-kmonad.ahk](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.ahk) in the background (or drop a shortcut into `shell:startup`).
+Run [toggle-kmonad.ahk](file:///c:/Users/pshivers/code-win/kmonad/toggle-kmonad.ahk) in the background.
+
+### Auto-start on Windows Boot
+To have the toggle and layout load automatically when you log in:
+1. Press <kbd>Win</kbd> + <kbd>R</kbd>, enter `shell:startup`, and press <kbd>Enter</kbd>.
+2. Right-click `toggle-kmonad.ahk` in this folder $\rightarrow$ **Show more options** $\rightarrow$ **Create shortcut** (or hold <kbd>Alt</kbd> while dragging `toggle-kmonad.ahk` into the Startup folder).
+3. Move the shortcut into the Startup folder.
 
 ### 1. Visual Taskbar Badge
 The script shows an always-visible badge in your Windows system tray:
-* **`[DH]` (Vibrant Blue badge)**: Colemak-DH layout is active.
+* **`[DH]` (Vibrant Lime Green / Chartreuse badge)**: Colemak-DH layout is active.
 * **`[QW]` (Subtle Charcoal badge)**: Normal QWERTY layout is active.
 
 ### 2. Single Hotkey: `Alt + Space`
